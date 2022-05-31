@@ -59,9 +59,9 @@ export const tableColumnTransform = () => {
     },
     {
       id: "numericWidth",
-      label: "10% width",
+      label: "30% width and right align",
       numeric: true,
-      width: "10%",
+      width: "30%",
     },
   ];
 

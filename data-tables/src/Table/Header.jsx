@@ -7,6 +7,7 @@ const Header = ({ columns, onSelectAll, selectAll, currentSelectAll }) => {
             <th
               className="px-8 py-4 bg-blue-100 border cursor-pointer"
               key={item.id}
+              style={{ width: item.width }}
             >
               {item.id === "checkbox" ? (
                 <input
