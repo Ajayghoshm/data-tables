@@ -7,13 +7,18 @@
 //     'product': (React.ReactNode | string | number),
 //     'price': '$15.5'
 //     }]}
-export const tableDataTransform = (data) => {
+export const tableDataTransform = (data, onSelectionChange) => {
   console.debug("data", data);
-  let rows = data.map((item) => {
+  let rows = data.map((item, index) => {
     return {
       id: item.id,
       title: item.title,
-      image: item.thumbnailUrl,
+      thumbnail: (
+        <div className="flex justify-center">
+          <img src={item.thumbnailUrl} width="50px" height="50px" alt="" />
+        </div>
+      ),
+      numeric: 1,
     };
   });
   return rows;
@@ -26,34 +31,33 @@ export const tableDataTransform = (data) => {
 //     'width': ('10px' | '10%' | '' | undefined),
 //     }]},
 
-export const tableColumnTransform = () => {
+export const tableColumnTransform = (selectAllFunction) => {
   let columns = [
     {
-      id: "id",
+      id: "checkbox",
       label: "checkbox",
       numeric: false,
-      width: "10%",
+      width: "",
     },
     {
       id: "thumbnail",
       label: "Image",
       numeric: false,
-      width: "10%",
+      width: "",
     },
     {
       id: "title",
       label: "Title",
       numeric: false,
+      width: undefined,
+    },
+    {
+      id: "numeric",
+      label: "SampleNumberic",
+      numeric: true,
       width: "10%",
     },
   ];
-  // let column = data.map((item) => {
-  //   return {
-  //     id: item.id, // Uniq ID to identify column
-  //     label: item.label,
-  //     numeric: item.isNumeric,
-  //     width: item.width,
-  //   };
-  // });
+
   return columns;
 };

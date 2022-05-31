@@ -7,8 +7,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [completeData, setCompleteData] = useState([]);
-  const [pageSize, setPageSize] = useState(25);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(50);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const ApiCall = async () => {
     setLoading(true);
@@ -17,8 +17,8 @@ function App() {
     console.debug("Api call", data);
     setCompleteData(data);
     let intialData = data.slice(
-      currentPage * pageSize - pageSize,
-      pageSize * currentPage
+      currentPage * pageSize,
+      pageSize * currentPage + pageSize
     );
     console.debug("intialData", intialData);
     setData(intialData);
@@ -26,12 +26,11 @@ function App() {
   };
 
   const onScroll = () => {
-    setCurrentPage((state) => state + 1);
-    let pageData = data.slice(
-      currentPage + 1 * pageSize - pageSize,
-      pageSize * currentPage + 1
-    );
-    setData(pageData);
+    let newPage = currentPage + 1;
+    let index = newPage * pageSize;
+    setCurrentPage(newPage);
+    let pageData = completeData.slice(index, index + pageSize);
+    setData((state) => [...state, ...pageData]);
   };
 
   useEffect(() => {
@@ -41,9 +40,13 @@ function App() {
   return (
     <div className="App">
       {loading ? (
-        <div>loading</div>
+        <div className="flex items-center justify-center w-full h-full">
+          loading
+        </div>
       ) : (
-        <Dashboard onScroll={onScroll} data={data} />
+        <div className="flex justify-center">
+          <Dashboard onScroll={onScroll} data={data} />
+        </div>
       )}
     </div>
   );
