@@ -12,19 +12,6 @@ const DataTable = ({
   const [currentSelectAll, setCurrentSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const onSelectAll = (value) => {
-    onSelectionStateChange("All", value);
-    setSelectAll(value);
-    setCurrentSelectAll(value);
-  };
-
-  const oneachSelectionChange = (item, index, status) => {
-    onSelectionStateChange(item);
-    if (!status && selectAll) {
-      setCurrentSelectAll(false);
-    }
-  };
-
   const onSelectionStateChange = useCallback((value) => {
     if (value === "All") {
       setSelectedRows(rows);
@@ -46,6 +33,22 @@ const DataTable = ({
         return item.id;
       });
       onSelectionChange(idArray);
+    }
+  }, []);
+
+  const onSelectAll = useCallback(
+    (value) => {
+      onSelectionStateChange("All", value);
+      setSelectAll(value);
+      setCurrentSelectAll(value);
+    },
+    [onSelectionStateChange]
+  );
+
+  const oneachSelectionChange = useCallback((item, index, status) => {
+    onSelectionStateChange(item);
+    if (!status && selectAll) {
+      setCurrentSelectAll(false);
     }
   }, []);
 

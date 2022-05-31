@@ -12,8 +12,8 @@ const Element = ({ item, column }) => {
     );
   } else if (typeof item === "number" || typeof item === "string") {
     return (
-      <td className="px-4" style={{ textAlign: textAlign }}>
-        <div style={{ width: width }}>{item}</div>
+      <td className="px-4" style={{ textAlign: textAlign, width: "100%" }}>
+        <div style={{ width: width, textAlign: textAlign }}>{item}</div>
       </td>
     );
   } else {

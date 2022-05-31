@@ -17,7 +17,8 @@ export const tableDataTransform = (data) => {
           <img src={item.thumbnailUrl} width="50px" height="50px" alt="" />
         </div>
       ),
-      numeric: 1,
+      numeric: 100,
+      numericWidth: 100,
     };
   });
   return rows;
@@ -42,7 +43,7 @@ export const tableColumnTransform = () => {
       id: "thumbnail",
       label: "Image",
       numeric: false,
-      width: "10px",
+      width: "20px",
     },
     {
       id: "title",
@@ -52,7 +53,13 @@ export const tableColumnTransform = () => {
     },
     {
       id: "numeric",
-      label: "SampleNumberic",
+      label: "Sample Numberic with right align",
+      numeric: true,
+      width: "",
+    },
+    {
+      id: "numericWidth",
+      label: "SampleNumeric with 10% width",
       numeric: true,
       width: "10%",
     },

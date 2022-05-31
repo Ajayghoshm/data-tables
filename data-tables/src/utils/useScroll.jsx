@@ -3,13 +3,16 @@ import { useCallback, useEffect, useRef } from "react";
 const useScrolhook = (callApi) => {
   const loaderRef = useRef(null);
 
-  const loadNext = useCallback((itemList) => {
-    const target = itemList[0];
-    if (target.isIntersecting) {
-      console.debug("scroll success");
-      callApi();
-    }
-  }, []);
+  const loadNext = useCallback(
+    (itemList) => {
+      const target = itemList[0];
+      if (target.isIntersecting) {
+        console.debug("scroll success");
+        callApi();
+      }
+    },
+    [callApi]
+  );
 
   useEffect(() => {
     const options = { root: null, rootMargin: "0px", thresold: 0.25 };

@@ -7,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [completeData, setCompleteData] = useState([]);
-  const [pageSize, setPageSize] = useState(50);
+  const [pageSize] = useState(50);
   const [currentPage, setCurrentPage] = useState(0);
 
   const ApiCall = async () => {
