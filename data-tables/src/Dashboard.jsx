@@ -11,14 +11,18 @@ const Dashboard = ({ data, onScroll }) => {
   const [tableColumns, setTableColumns] = useState([]);
 
   useEffect(() => {
+    //convertion of data to required row format
     setTableRows(tableDataTransform(data));
+    //convertion of data to required column format
     setTableColumns(tableColumnTransform());
   }, [data]);
 
+  //on rowclick function
   const onRowClick = useCallback((item, index) => {
     console.debug("rowClick", item, index);
   }, []);
 
+  //on checkbox selection
   const onSelectionChange = (value) => {
     console.debug(value);
   };

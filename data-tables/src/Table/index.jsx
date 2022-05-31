@@ -11,27 +11,35 @@ const DataTable = ({
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
+  //for select all checkbox in the header
   const onSelectAll = (value) => {
+    //on selection
     if (value) {
       let idArray = rows.map((item) => {
         return item.id;
       });
       setSelectedRows(idArray);
       onSelectionChange("All");
-    } else {
+    }
+    //on selection removal
+    else {
       setSelectedRows([]);
       onSelectionChange([]);
     }
     setSelectAll(value);
   };
 
+  //for each individual item checkbox
   const oneachSelectionChange = (currentitem, index, status) => {
     let newArray = JSON.parse(JSON.stringify(selectedRows));
+    //on selection
     if (status === true) {
       console.debug("adding");
       newArray = [...newArray, currentitem.id];
       setSelectedRows(newArray);
-    } else if (status === false) {
+    }
+    // on removal of selection
+    else if (status === false) {
       console.debug("removal");
       newArray = newArray.filter((item) => {
         return item !== currentitem.id;
@@ -41,6 +49,7 @@ const DataTable = ({
         setSelectAll(false);
       }
     }
+    //external function call
     onSelectionChange(newArray);
   };
 

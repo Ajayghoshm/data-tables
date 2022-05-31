@@ -10,6 +10,7 @@ function App() {
   const [pageSize] = useState(50);
   const [currentPage, setCurrentPage] = useState(0);
 
+  //api call
   const ApiCall = async () => {
     setLoading(true);
     let data = await photosApi();
@@ -22,6 +23,7 @@ function App() {
     setLoading(false);
   };
 
+  //infinte scroll function
   const onScroll = () => {
     let newPage = currentPage + 1;
     let index = newPage * pageSize;
