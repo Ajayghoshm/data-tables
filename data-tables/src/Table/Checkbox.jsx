@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
 
-const Checkbox = ({ value = false, selectAll, onChange }) => {
+const Checkbox = ({ value, onChange }) => {
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
-    if (selectAll) {
-      setStatus(true);
-    } else {
-      setStatus(value);
-    }
-  }, [value, selectAll]);
+    setStatus(value);
+  }, [value]);
 
-  const onStatusChange = () => {
-    onChange(!status);
-    setStatus((state) => !state);
+  const onStatusChange = (value) => {
+    onChange(value);
+    setStatus(value);
   };
 
   return (
@@ -23,7 +19,7 @@ const Checkbox = ({ value = false, selectAll, onChange }) => {
       checked={status}
       onChange={(e) => {
         e.stopPropagation();
-        onStatusChange();
+        onStatusChange(e.target.checked);
       }}
     />
   );

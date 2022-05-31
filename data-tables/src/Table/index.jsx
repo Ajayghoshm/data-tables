@@ -9,50 +9,40 @@ const DataTable = ({
   onSelectionChange = () => {},
 }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [currentSelectAll, setCurrentSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const onSelectionStateChange = useCallback((value) => {
-    if (value === "All") {
-      setSelectedRows(rows);
-      onSelectionChange("All");
-    } else {
-      let index = selectedRows.findIndex((item) => {
-        return item.id === value.id;
-      });
-      let newArray = [...selectedRows];
-      if (index === -1) {
-        newArray.push(value);
-      } else {
-        newArray = newArray.filter((item) => {
-          return item.id !== value.id;
-        });
-      }
-      setSelectedRows(newArray);
-      let idArray = newArray.map((item) => {
+  const onSelectAll = (value) => {
+    if (value) {
+      let idArray = rows.map((item) => {
         return item.id;
       });
-      onSelectionChange(idArray);
+      setSelectedRows(idArray);
+      onSelectionChange("All");
+    } else {
+      setSelectedRows([]);
+      onSelectionChange([]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setSelectAll(value);
+  };
 
-  const onSelectAll = useCallback(
-    (value) => {
-      onSelectionStateChange("All", value);
-      setSelectAll(value);
-      setCurrentSelectAll(value);
-    },
-    [onSelectionStateChange]
-  );
-
-  const oneachSelectionChange = useCallback((item, index, status) => {
-    onSelectionStateChange(item);
-    if (!status && selectAll) {
-      setCurrentSelectAll(false);
+  const oneachSelectionChange = (currentitem, index, status) => {
+    let newArray = JSON.parse(JSON.stringify(selectedRows));
+    if (status === true) {
+      console.debug("adding");
+      newArray = [...newArray, currentitem.id];
+      setSelectedRows(newArray);
+    } else if (status === false) {
+      console.debug("removal");
+      newArray = newArray.filter((item) => {
+        return item !== currentitem.id;
+      });
+      setSelectedRows(newArray);
+      if (selectAll) {
+        setSelectAll(false);
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    onSelectionChange(newArray);
+  };
 
   return (
     <table className="bg-white shadow-lg">
@@ -60,14 +50,13 @@ const DataTable = ({
         columns={columns}
         onSelectAll={onSelectAll}
         selectAll={selectAll}
-        currentSelectAll={currentSelectAll}
       />
       <Body
         columns={columns}
         onRowClick={onRowClick}
         rows={rows}
         onSelectionChange={oneachSelectionChange}
-        selectAll={selectAll}
+        selectedRows={selectedRows}
       />
     </table>
   );

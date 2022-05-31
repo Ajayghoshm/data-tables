@@ -16,7 +16,7 @@ const Header = ({ columns, onSelectAll, selectAll, currentSelectAll }) => {
                     e.stopPropagation();
                     onSelectAll(e.target.checked);
                   }}
-                  checked={selectAll && currentSelectAll}
+                  checked={selectAll}
                 />
               ) : (
                 item.label

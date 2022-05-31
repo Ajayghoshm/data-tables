@@ -1,7 +1,13 @@
 import Checkbox from "./Checkbox";
 import Element from "./Elements";
 
-const Body = ({ rows, columns, onRowClick, onSelectionChange, selectAll }) => {
+const Body = ({
+  rows,
+  columns,
+  onRowClick,
+  onSelectionChange,
+  selectedRows,
+}) => {
   return (
     <tbody>
       {rows.map((rowitem, index) => {
@@ -23,7 +29,7 @@ const Body = ({ rows, columns, onRowClick, onSelectionChange, selectAll }) => {
                       onChange={(status) => {
                         onSelectionChange(rowitem, index, status);
                       }}
-                      selectAll={selectAll}
+                      value={selectedRows.includes(rowitem.id)}
                     />
                   </td>
                 );
