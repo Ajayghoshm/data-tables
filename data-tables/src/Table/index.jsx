@@ -51,6 +51,7 @@ const DataTable = ({
     if (!status && selectAll) {
       setCurrentSelectAll(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
