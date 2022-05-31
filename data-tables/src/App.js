@@ -12,15 +12,12 @@ function App() {
 
   const ApiCall = async () => {
     setLoading(true);
-    console.debug("Api call");
     let data = await photosApi();
-    console.debug("Api call", data);
     setCompleteData(data);
     let intialData = data.slice(
       currentPage * pageSize,
       pageSize * currentPage + pageSize
     );
-    console.debug("intialData", intialData);
     setData(intialData);
     setLoading(false);
   };

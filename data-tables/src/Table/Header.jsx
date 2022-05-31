@@ -1,4 +1,4 @@
-const Header = ({ columns, onSelectAll, selectAll }) => {
+const Header = ({ columns, onSelectAll, selectAll, currentSelectAll }) => {
   return (
     <thead>
       <tr>
@@ -11,11 +11,12 @@ const Header = ({ columns, onSelectAll, selectAll }) => {
               {item.id === "checkbox" ? (
                 <input
                   type="checkbox"
+                  data-testid="all-checkbox"
                   onChange={(e) => {
                     e.stopPropagation();
-                    onSelectAll();
+                    onSelectAll(e.target.checked);
                   }}
-                  checked={selectAll}
+                  checked={selectAll && currentSelectAll}
                 />
               ) : (
                 item.label

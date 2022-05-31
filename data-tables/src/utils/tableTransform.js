@@ -7,8 +7,7 @@
 //     'product': (React.ReactNode | string | number),
 //     'price': '$15.5'
 //     }]}
-export const tableDataTransform = (data, onSelectionChange) => {
-  console.debug("data", data);
+export const tableDataTransform = (data) => {
   let rows = data.map((item, index) => {
     return {
       id: item.id,
@@ -31,7 +30,7 @@ export const tableDataTransform = (data, onSelectionChange) => {
 //     'width': ('10px' | '10%' | '' | undefined),
 //     }]},
 
-export const tableColumnTransform = (selectAllFunction) => {
+export const tableColumnTransform = () => {
   let columns = [
     {
       id: "checkbox",
@@ -43,7 +42,7 @@ export const tableColumnTransform = (selectAllFunction) => {
       id: "thumbnail",
       label: "Image",
       numeric: false,
-      width: "",
+      width: "10px",
     },
     {
       id: "title",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DataTable from "./Table";
 import InfiniteScroll from "./InfinteScrollComponent";
 import {
@@ -10,38 +10,17 @@ const Dashboard = ({ data, onScroll }) => {
   const [tableRows, setTableRows] = useState([]);
   const [tableColumns, setTableColumns] = useState([]);
 
-  const [selectedRows, setSelectedRows] = useState([]);
-
-  const selectAllFunction = () => {
-    setSelectedRows(data);
-  };
-
-  const onSelectionChange = (value) => {
-    if (value === "All") {
-      setSelectedRows(data);
-    } else {
-      let index = selectedRows.findIndex((item) => {
-        return item.id === value.id;
-      });
-      let newArray = [...selectedRows];
-      if (index === -1) {
-        newArray.push(value);
-      } else {
-        newArray = newArray.filter((item) => {
-          return item.id !== value.id;
-        });
-      }
-      setSelectedRows(newArray);
-    }
-  };
-
   useEffect(() => {
-    setTableRows(tableDataTransform(data, onSelectionChange));
-    setTableColumns(tableColumnTransform(selectAllFunction));
+    setTableRows(tableDataTransform(data));
+    setTableColumns(tableColumnTransform());
   }, [data]);
 
-  const onRowClick = (item, index) => {
-    console.debug("Row Clicked", item, index);
+  const onRowClick = useCallback((item, index) => {
+    console.debug("rowClick", item, index);
+  }, []);
+
+  const onSelectionChange = (value) => {
+    console.debug(value);
   };
 
   return (

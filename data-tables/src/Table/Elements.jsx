@@ -6,14 +6,14 @@ const Element = ({ item, column }) => {
 
   if (React.isValidElement(item)) {
     return (
-      <td className="px-4" style={{ width: width, textAlign: textAlign }}>
-        {item}
+      <td className="px-4" style={{ textAlign: textAlign }}>
+        <div style={{ width: width }}>{item}</div>
       </td>
     );
   } else if (typeof item === "number" || typeof item === "string") {
     return (
-      <td className="px-4" style={{ width: width, textAlign: textAlign }}>
-        {item}
+      <td className="px-4" style={{ textAlign: textAlign }}>
+        <div style={{ width: width }}>{item}</div>
       </td>
     );
   } else {

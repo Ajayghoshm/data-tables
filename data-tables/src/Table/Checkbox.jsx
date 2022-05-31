@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const Checkbox = ({ value = false, selectAll, onChange }) => {
   const [status, setStatus] = useState(false);
+
   useEffect(() => {
     if (selectAll) {
       setStatus(true);
@@ -17,6 +18,7 @@ const Checkbox = ({ value = false, selectAll, onChange }) => {
 
   return (
     <input
+      data-testid="individual-checkbox"
       type="checkbox"
       checked={status}
       onChange={(e) => {
