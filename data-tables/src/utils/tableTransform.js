@@ -53,13 +53,13 @@ export const tableColumnTransform = () => {
     },
     {
       id: "numeric",
-      label: "Sample Numberic with right align",
+      label: "right align",
       numeric: true,
       width: "",
     },
     {
       id: "numericWidth",
-      label: "SampleNumeric with 10% width",
+      label: "10% width",
       numeric: true,
       width: "10%",
     },
