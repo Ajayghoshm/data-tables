@@ -24,6 +24,7 @@ const useScrolhook = (callApi) => {
     }
 
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       observer.unobserve(loaderRef.current);
     };
   });

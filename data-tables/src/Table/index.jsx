@@ -34,6 +34,7 @@ const DataTable = ({
       });
       onSelectionChange(idArray);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSelectAll = useCallback(
